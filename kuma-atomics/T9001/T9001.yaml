@@ -1,0 +1,63 @@
+attack_technique: T9001
+display_name: Using known malware tools
+atomic_tests:
+- name: R077_02_KSC. Обнаружено вредоносное ПО                                 
+  auto_generated_guid: ba5fa5cf-22e7-4565-9678-5f0594db356d
+  description: |
+    Generate EICAR file using powershell one time
+  supported_platforms:
+  - windows
+  input_arguments:
+    path:
+      description: Path to place EICAR file
+      type: String
+      default: C:\malware-samples\
+  executor:
+    command: |
+      [System.IO.File]::WriteAllLines('#{path}eicar.com', 'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*', [System.Text.UTF8Encoding]($False))
+    cleanup_command: |
+      Remove-Item -Path "#{path}eicar.com" -Force
+    name: powershell
+    elevation_required: false
+- name: CUSTOM R078_02_KSC. Обнаружено большое количество вредоносных объектов на одном хосте                                 
+  auto_generated_guid: 0aa5c811-875d-4a3d-bd0d-69601dd63146
+  description: |
+    Generate EICAR file using powershell five times
+  supported_platforms:
+  - windows
+  input_arguments:
+    path:
+      description: Path to place EICAR file
+      type: String
+      default: C:\malware-samples\
+  executor:
+    command: |
+      for ($i = 1; $i -le 5; $i++) {
+        [System.IO.File]::WriteAllLines('#{path}eicar.com_'+$i, 'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*', [System.Text.UTF8Encoding]($False))
+        Start-Sleep -Seconds 5
+      }
+    cleanup_command: |
+        Remove-Item -Path "#{path}eicar.com_*" -Force
+    name: powershell
+    elevation_required: false
+- name: R081_02_KSC. Повторное заражение ВПО                                 
+  auto_generated_guid: 419348c8-3323-4d2c-bdae-cff8304a7c89
+  description: |
+    Generate EICAR file using powershell two times with little pause
+  supported_platforms:
+  - windows
+  input_arguments:
+    path:
+      description: Path to place EICAR file
+      type: String
+      default: C:\malware-samples\
+  executor:
+    command: |
+      for ($i = 1; $i -le 2; $i++) {
+        [System.IO.File]::WriteAllLines('#{path}eicar.com_'+$i, 'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*', [System.Text.UTF8Encoding]($False))
+        Start-Sleep -Seconds 5
+      }
+    cleanup_command: |
+      Remove-Item -Path "#{path}eicar.com_*" -Force
+    name: powershell
+    elevation_required: false

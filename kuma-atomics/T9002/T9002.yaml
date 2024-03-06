@@ -1,0 +1,61 @@
+attack_technique: T9002
+display_name: Delete multiple files
+atomic_tests:
+- name: CUSTOM_R089_01_Удаление данных через команду массового удаления                                 
+  auto_generated_guid: 134b2d6f-7516-46e3-a497-4f2fe6c1ecd7
+  kuma_rule_id: CUSTOM_R089_01
+  kuma_rule_name: CUSTOM_R089_01_Удаление данных через команду массового удаления
+  kuma_group_name: File System Manipulation
+  description: |
+    Generate 5 empty files in 5 different folders, then delete them using PowerShell via CMD.
+  supported_platforms:
+  - windows
+  input_arguments:
+    path:
+      description: Path to atomic-temp folder
+      type: Path
+      default: C:\atomic-temp\
+  executor:
+    command: |
+      for ($i = 1; $i -le 5; $i++) {
+        New-Item -ItemType Directory -Path "#{path}folder_$i"
+        New-Item -ItemType File -Path "#{path}folder_$i\file.txt"
+        Start-Process "cmd.exe" -ArgumentList "/c del #{path}folder_$i\*.txt" -NoNewWindow -Wait
+      }
+
+    cleanup_command:
+      for ($i = 1; $i -le 5; $i++) {
+        Remove-Item -Path "#{path}folder_$i" -Recurse -Force
+      }
+    name: powershell
+    elevation_required: false
+- name: R089_02_Подозрительное массовое переименование или удаление файлов (Windows)                                 
+  auto_generated_guid: 134b2d6f-7516-46e3-a497-4f2fe6c1ecd7
+  kuma_rule_id: R089_02
+  kuma_rule_name: R089_02_Подозрительное массовое переименование или удаление файлов (Windows)
+  kuma_group_name: File System Manipulation
+  description: |
+    Generate 100 empty files and then delete them using PowerShell
+  supported_platforms:
+  - windows
+  input_arguments:
+    path:
+      description: Path to atomic-temp folder
+      type: Path
+      default: C:\atomic-temp\
+  executor:
+    command: |
+      # Create 100 empty files
+      1..100 | ForEach-Object {
+        $fileName = "EmptyFile$_"  # Naming convention: EmptyFile1, EmptyFile2, ...
+        $filePath = Join-Path -Path #{path} -ChildPath $fileName  # Construct full path
+    
+        New-Item -ItemType File -Path $filePath -Force  # Create empty file
+        Write-Host "Created file: $fileName"
+      }
+      Start-Sleep -Seconds 5
+      # Delete the 100 files
+      Get-ChildItem -Path #{path} -Filter "EmptyFile*" | Remove-Item -Force
+      Write-Host "Deleted all empty files."
+    name: powershell
+    elevation_required: false

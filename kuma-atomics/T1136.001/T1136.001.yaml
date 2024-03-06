@@ -1,0 +1,69 @@
+attack_technique: T1136.001
+display_name: Create Account - Local Account
+atomic_tests:
+- name: R061_01_Действия над учетной записью из командной строки (cmd)                                 
+  auto_generated_guid: 3bb0a036-57b0-41c5-9563-b304433e2717
+  description: |
+    Add local user using net.exe                             
+  supported_platforms:
+  - windows
+  input_arguments:
+    username:
+      description: test local user
+      type: String
+      default: r061_01_user
+    password:
+      description: password of test local user
+      type: String
+      default: p@ssW0rd
+  executor:
+    command: |
+      net user /add "#{username}" "#{password}"
+    cleanup_command: |
+      net user /del "#{username}" >nul 2>&1
+    name: command_prompt
+    elevation_required: true
+- name: R061_02_Действия над учетной записью из командной строки (PowerShell)                                
+  auto_generated_guid: 8fb6d419-ad04-4373-85d7-0f26d933883c
+  description: |
+    Add local user using powershell                            
+  supported_platforms:
+  - windows
+  input_arguments:
+    username:
+      description: test local user
+      type: String
+      default: r061_01_user
+    password:
+      description: password of test local user
+      type: String
+      default: p@ssW0rd
+  executor:
+    command: |
+      New-LocalUser -Name "#{username}" -Password (ConvertTo-SecureString "#{password}" -AsPlainText -Force) -FullName "#{username}" -Description "Test account"
+    cleanup_command: |
+      Remove-LocalUser "#{username}"
+    name: powershell
+    elevation_required: true
+- name: R061_03_Действия над учетной записью из командной строки (PowerShell) (cmd)                                
+  auto_generated_guid: 9b7b1df3-5428-4f4b-a2ce-30f53b255fa7
+  description: |
+    Add local user using powershell from cmd                          
+  supported_platforms:
+  - windows
+  input_arguments:
+    username:
+      description: test local user
+      type: String
+      default: r061_01_user
+    password:
+      description: password of test local user
+      type: String
+      default: p@ssW0rd
+  executor:
+    command: |
+      powershell.exe -command "New-LocalUser -Name '"#{username}"' -Password (ConvertTo-SecureString '"#{password}"' -AsPlainText -Force) -FullName '"#{username}"' -Description 'Test account'"
+    cleanup_command: |
+      powershell.exe "Remove-LocalUser '"#{username}"'"
+    name: command_prompt
+    elevation_required: true

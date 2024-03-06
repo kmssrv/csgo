@@ -1,0 +1,58 @@
+attack_technique: T1070.001
+display_name: Indicator Removal on Host Clear Windows Event Logs
+atomic_tests:
+- name: R050_01_Очистка журнала событий Windows через командную строку using wevtutil                                 
+  auto_generated_guid: f654d389-57ed-4deb-bc6f-668dcbe00fe4
+  kuma_id_rule: R050_01
+  description: |
+    Clear Windows Event Log via wevtutil.exe                             
+  supported_platforms:
+  - windows
+  input_arguments:
+    log_name:
+      description: Windows Log Name, ex System
+      type: String
+      default: System
+  executor:
+    command: |
+      wevtutil cl #{log_name}
+      
+    name: command_prompt
+    elevation_required: true
+- name: R050_01_Очистка журнала событий Windows через командную строку using powershell                                 
+  auto_generated_guid: 07922a66-c49b-4a34-93d3-436e3f8f4e2c
+  kuma_id_rule: R050_01
+  description: |
+    Clear Windows Event Log via powershell                             
+  supported_platforms:
+  - windows
+  input_arguments:
+    log_name:
+      description: Windows Log Name, ex System
+      type: String
+      default: System
+  executor:
+    command: |
+      Clear-EventLog -LogName '#{log_name}'
+      
+    name: powershell
+    elevation_required: true
+    
+- name: R050_01_Очистка журнала событий Windows через командную строку using wmi                                 
+  auto_generated_guid: 07922a66-c49b-4a34-93d3-436e3f8f4e2c
+  kuma_id_rule: R050_01
+  description: |
+    Clear Windows Event Log via wmi                             
+  supported_platforms:
+  - windows
+  input_arguments:
+    log_name:
+      description: Windows Log Name, ex System
+      type: String
+      default: System
+  executor:
+    command: |
+      echo '!This is MOCK!' input_arguments: '#{log_name}'
+      
+    name: powershell
+    elevation_required: true

@@ -1,0 +1,1 @@
+Clear-EventLog -LogName System

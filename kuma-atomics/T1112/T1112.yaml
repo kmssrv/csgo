@@ -1,0 +1,146 @@
+attack_technique: T1112
+display_name: Modify Registry
+atomic_tests:
+- name: R093_01_Изменение Winlogon Helper DLL через реестр Windows
+  kuma_rule: R093_01_Изменение Winlogon Helper DLL через реестр Windows)
+  kuma_group: Registry Manipulation
+  kedr_rule: 
+  kedr_rule_id: 
+  auto_generated_guid: ad4db0d5-a67e-4187-8888-0e0f6127bea9
+  description: |
+    Get the value of HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Shell.
+    Set the value of 'Shell' to test.exe.
+    Return the value of 'Shell' to its original state.
+  supported_platforms:
+  - windows
+  input_arguments:
+    new_value:
+      description: The value of 'Shell' that will be changed.
+      type: String
+      default: test.exe
+  executor:
+    command: |
+      # Define the registry key path
+      $keyPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
+      # Retrieve the value of key
+      $value = (Get-ItemProperty -Path $keyPath).Shell
+      # Output a message indicating current value
+      Write-Output "The value of 'Shell' key is '$value'"
+      # Define the new value for the 'Shell' key (replace "#{new_value}" with the desired value)
+      # Set the value of the 'Shell' key to the new value
+      Set-ItemProperty -Path $keyPath -Name "Shell" -Value #{new_value}
+      # Output a message indicating that the key has been modified
+      Write-Output "The value of 'Shell' key has been modified to '#{new_value}'."
+      # Set the value of the 'Shell' key to the old value
+      Set-ItemProperty -Path $keyPath -Name "Shell" -Value $value
+      # Retrieve the value of key
+      $value = (Get-ItemProperty -Path $keyPath).Shell
+      # Output a message indicating that the key has been modified
+      Write-Output "The value of 'Shell' key has been modified to '$value'."
+    cleanup_command: |
+      $keyPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
+      Set-ItemProperty -Path $keyPath -Name "Shell" -Value "explorer.exe"
+    name: powershell
+    elevation_required: true
+- name: R093_02_Изменение критичных веток реестра
+  kuma_rule: R093_02_Изменение критичных веток реестра
+  kuma_group: Registry Manipulation
+  kedr_rule: 
+  kedr_rule_id: 
+  auto_generated_guid: ca374641-f2e7-4fe7-939e-9fee2a4e34bc
+  description: |
+    Create key in HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  supported_platforms:
+  - windows
+  input_arguments:
+    key:
+      description: key
+      type: String
+      default: test
+    value:
+      description: value
+      type: String
+      default: test
+  executor:
+    command: |
+      # Define the registry key path
+      $keyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+      New-ItemProperty -Path $keyPath -Name "#{key}" -Value "#{value}" -PropertyType String
+    cleanup_command: |
+      $keyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+      Remove-ItemProperty -Path $keyPath -Name "#{key}"
+    name: powershell
+    elevation_required: true
+- name: R093_03_Добавление файлов из публичных директорий в автозапуск через реестр Windows (cmd)
+  kuma_rule: R093_03_Добавление файлов из публичных директорий в автозапуск через реестр Windows (cmd)
+  kuma_group: Registry Manipulation
+  kedr_rule: 
+  kedr_rule_id: 
+  auto_generated_guid: 337394f0-82f5-444f-92fc-b70afd058b91
+  description: |
+    mock
+  supported_platforms:
+  - windows
+  executor:
+    command: |
+       Write-Host This is mock
+    name: powershell
+    elevation_required: true
+- name: R093_04_Добавление параметров в svchost через реестр Windows
+  kuma_rule: R093_04_Добавление параметров в svchost через реестр Windows
+  kuma_group: Registry Manipulation
+  kedr_rule: 
+  kedr_rule_id: 
+  auto_generated_guid: 4016473c-5a56-4df8-8b63-18d3fc6bbf10
+  description: |
+    Create key in HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost
+  supported_platforms:
+  - windows
+  input_arguments:
+    key:
+      description: key
+      type: String
+      default: test
+    value:
+      description: value
+      type: String
+      default: test
+  executor:
+    command: |
+      # Define the registry key path
+      $keyPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost"
+      New-ItemProperty -Path $keyPath -Name "#{key}" -Value "#{value}" -PropertyType String
+    cleanup_command: |
+      $keyPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost"
+      Remove-ItemProperty -Path $keyPath -Name "#{key}"
+    name: powershell
+    elevation_required: true
+- name: R093_05_Изменение программ по умолчанию для открытия файлов
+  kuma_rule: R093_05_Изменение программ по умолчанию для открытия файлов
+  kuma_group: Registry Manipulation
+  kedr_rule: 
+  kedr_rule_id: 
+  auto_generated_guid: d20c43b9-3a4a-4653-8f23-2294c3e77593
+  description: |
+    Create key in "HKLM:\SOFTWARE\Classes\Folder\shell\open\command"
+  supported_platforms:
+  - windows
+  input_arguments:
+    key:
+      description: key
+      type: String
+      default: test
+    value:
+      description: value
+      type: String
+      default: test
+  executor:
+    command: |
+      # Define the registry key path
+      $keyPath = "HKLM:\SOFTWARE\Classes\Folder\shell\open\command"
+      New-ItemProperty -Path $keyPath -Name "#{key}" -Value "#{value}" -PropertyType String
+    cleanup_command: |
+      $keyPath = "HKLM:\SOFTWARE\Classes\Folder\shell\open\command"
+      Remove-ItemProperty -Path $keyPath -Name "#{key}"
+    name: powershell
+    elevation_required: true
