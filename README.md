@@ -66,6 +66,13 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 Готово
 ![jenkins-install](img/jenkins-install/jenkins-install-05.png)
 
+### Настройка Jenkins (сервер)
+Перейти в раздел
+**Manage Jenkins -> Plugins -> Availavble plugins**
+
+Установить плагин **Webhook Step**
+![jenkins-install](img/jenkins-install/jenkins-settings-01.png)
+
 ### Установка Jenkins (агент)
 ### Подготовка Windows сервера для запуска тестов
 ## Скоро
