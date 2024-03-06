@@ -74,6 +74,36 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 ![jenkins-install](img/jenkins-install/jenkins-settings-01.png)
 
 ### Установка Jenkins (агент)
+#### Подготовка конфигурации  агента на Jenkins сервере
+Перейти в раздел
+**Manage Jenkins -> Nodes ->New Node**
+Задать имя агента и создать его. В конфигурации достаточно указать label: windows-agent. Остальное можно оставить по умолчанию.
+![jenkins-install](img/jenkins-install/jenkins-settings-02.png)
+
+Перейти в раздел конфигурации агента и сохранить команду запуска агента **Manage Jenkins -> Nodes ->windows**
+
+#### Установка на Windows Server 2016
+**Установка Java**
+Скачать инсталлятор Java 17 для Windows и выполнить стандартные шаги установки.
+https://download.oracle.com/java/17/archive/jdk-17.0.10_windows-x64_bin.exe
+
+Создать директорию
+С:\jenkins
+
+Любым удобным способом загрузить дистрибутив агента Jenkins (например с помощью браузера: http://jenkin-address:8080/jnlpJars/agent.jar) и сохранить его в C:\jenkins
+
+Для установки агента Jenkins в качестве службы Windiows предлагается использовать проект  Windows Service Wrapper https://github.com/winsw/winsw
+Чтобы установить агент Jenkins в качестве службы, необходимо
+1. Скачать и сохранить исполняемый файл WinSW.exe (https://github.com/winsw/winsw/releases) в C:\jenkins
+2. Скачать пример файла конфигурации WinSW.xml, сохранить  в C:\jenkins и отредактировать. В аргументах указать команду запуска агента, сохраненную ранее.
+3. Выполнить установку агента Jenkins в качестве сервиса
+```
+c:\jenkins>WinSW-x64.exe install WinSW-x64.xml
+2024-03-06 04:42:30,620 INFO  - Installing service 'Jenkins (jenkins)'...
+2024-03-06 04:42:30,699 INFO  - Service 'Jenkins (jenkins)' was installed successfully.
+```
+![jenkins-install](img/jenkins-install/jenkins-agent-01.png)
+
 ### Подготовка Windows сервера для запуска тестов
 ## Скоро
 Скоро в репозитории появятся примеры тестов и инструкции по настройке системы.
