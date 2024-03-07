@@ -1,0 +1,9 @@
+<service>
+  <id>jenkins</id>
+  <name>Jenkins</name>
+  <description>This service runs Jenkins continuous integration system.</description>
+  <env name="JENKINS_HOME" value="%BASE%"/>
+  <executable>java</executable>
+  <arguments>-jar agent.jar -jnlpUrl http://csgo-jenkins.kogorta.lab:8080/computer/csgo%2Dwindows%2Dserver/jenkins-agent.jnlp -secret 3ee6930e072811e36c07e90598d5d38a9c33ee2f1c70ede3eab97185bc6492cf -workDir "c:\jenkins"</arguments>
+  <log mode="roll"></log>
+</service>
