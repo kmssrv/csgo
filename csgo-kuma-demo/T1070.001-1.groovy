@@ -6,7 +6,7 @@ pipeline {
             steps {
                 powershell '''
 					Invoke-AtomicTest T1070.001 -PathToAtomicsFolder "C:\\kuma-atomics" -TestNumbers 1
-					'''
+				'''
             }
         }
         stage('Recive alert from KUMA: R050_01'){
