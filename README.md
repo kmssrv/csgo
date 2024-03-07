@@ -29,9 +29,9 @@
 #### Содержание
 - [Установка и настройка Jenkins](jenkins-install/README.md)
 - [Установка модуля Invoke-Atomic на Windows Server](invoke-atomicredteam-install/README.md)
-- [Подготовка Windows Server для запуска тестов KUMA atomics](kuma-atomics/readme)
+- [Подготовка Windows Server для запуска тестов KUMA atomics](kuma-atomics/README.md)
 - Настройка SIEM
-- [Централизованный запуск тестов и анализ алертов SIEM KUMA (демо)](csgo-kuma-demo/README)
+- [Централизованный запуск тестов и анализ алертов SIEM KUMA (демо)](csgo-kuma-demo/README.md)
 #### Скоро
 Что-то будет:)
 #### История
