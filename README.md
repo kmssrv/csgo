@@ -1,9 +1,9 @@
-## CSGO: Continues Security and Guided Operations (ru)
+# CSGO: Continues Security and Guided Operations (ru)
 Проект посвящен концепции обеспечения непрерывности процессов информационной безопасности Continues Security and Guided Operations (CSGO). Её суть заключается в том, что на любую детектирующую логику должен быть написан соответствующий тест и этот тест должен выполнятся регулярно и как можно чаще.
 
 ![csgo_overview.png](img/csgo_overview.png)
 Сейчас за основу взяты следующие компоненты:
-1. Проект Atomic Red Team (далее ART). Библиотека тестов, которую можно расширять своими сценариями.
+1. Проект Atomic Red Team (далее - ART). Библиотека тестов, которую можно расширять своими сценариями.
 2. Jenkins в качестве оркестратора, который запускает тесты и анализирует алерты на стороне SIEM.
 
 Почему именно они?
@@ -18,21 +18,21 @@
 3. GUI. Простой графический интерфейс удобен на этапе прототипирования и ускоряет разработку различных сценариев proof of concept.
 
 Выбор данных инструментов не окончательный и будет зависеть от отклика ИБ комьюнити.  
-#### Демонстрация работы системы на примере KUMA SIEM (Kaspersky)
+## Демонстрация работы системы на примере KUMA SIEM (Kaspersky)
 
 ![csgo_demo.gif](img/csgo_demo.gif)
 
-#### Требования
+## Требования
 - [Jenkins](https://www.jenkins.io/)  версии 2.426 с поддержкой websockets, а также с установленным плагинам [Webhook Step](https://plugins.jenkins.io/webhook-step) .
 - Модуль PowerShell [Invoke-AtomicRedTeam](https://github.com/redcanaryco/invoke-atomicredteam).
 - SIEM с поддержкой вэбхуков.
-#### Содержание
+## Содержание
 - [Установка и настройка Jenkins](jenkins-install/README.md)
 - [Установка модуля Invoke-Atomic на Windows Server](invoke-atomicredteam-install/README.md)
 - [Подготовка Windows Server для запуска тестов KUMA atomics](kuma-atomics/README.md)
 - Настройка SIEM
 - [Централизованный запуск тестов и анализ алертов SIEM KUMA (демо)](csgo-kuma-demo/README.md)
-#### Скоро
+## Скоро
 Что-то будет:)
-#### История
+## История
 27.02.2024 Презентация концепции на KUMA Meetup
