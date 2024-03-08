@@ -1,10 +1,10 @@
-## KUMA Atomics
+# KUMA Atomics
 Раздел содержит тесты, покрывающие соответствующие правила корреляции SIEM KUMA. Тесты написаны в формате YAML Atomic Red Team. Их можно запускать:
 1. как отдельные самостоятельные сущности с использованием PowerShell модуля Invoke-AtomicRedTeam;
 2. централизовано с использованием Jenkins в качестве оркестратора. Для этого в директории каждого теста содержится конфигурация пайплайна Jenkins.
-#### Подготовка
+## Подготовка
 Сохранить тесты в директорию C:\kuma-atomics.
-#### Проверка
+## Проверка
 Выполнить команду в PowerShell
 ```
 Invoke-AtomicTest T9001 -PathToAtomicsFolder "C:\kuma-atomics" -TestNumbers 1 -ShowDetails
