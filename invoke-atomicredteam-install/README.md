@@ -1,4 +1,4 @@
-## Установка модуля Invoke-Atomic на Windows Server
+# Установка модуля Invoke-Atomic на Windows Server
 Для запуска тестов в формате YAML, разработанных командой Atomic Red Team, а также своих собственных тестов, необходимо установить модуль PowerShell модуль Invoke-AtomicRedTeam. [Документация по работе с модулем](https://github.com/redcanaryco/invoke-atomicredteam/wiki).
 
 Простейший способ установки - из галереи PowerShell:
