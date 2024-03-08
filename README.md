@@ -23,15 +23,15 @@
 ![csgo_demo.gif](img/csgo_demo.gif)
 
 ## Требования
-- [Jenkins](https://www.jenkins.io/)  версии 2.426 с поддержкой websockets, а также с установленным плагинам [Webhook Step](https://plugins.jenkins.io/webhook-step) .
+- [Jenkins](https://www.jenkins.io/)  версии 2.426 с поддержкой websockets, а также с установленным плагином [Webhook Step](https://plugins.jenkins.io/webhook-step) .
 - Модуль PowerShell [Invoke-AtomicRedTeam](https://github.com/redcanaryco/invoke-atomicredteam).
 - SIEM с поддержкой вэбхуков.
 ## Содержание
 - [Установка и настройка Jenkins](jenkins-install/README.md)
 - [Установка модуля Invoke-Atomic на Windows Server](invoke-atomicredteam-install/README.md)
-- [Подготовка Windows Server для запуска тестов KUMA atomics](kuma-atomics/README.md)
+- [Подготовка Windows Server для запуска тестов](kuma-atomics/README.md)
 - Настройка SIEM
-- [Централизованный запуск тестов и анализ алертов SIEM KUMA (демо)](csgo-kuma-demo/README.md)
+- [Централизованный запуск тестов и анализ алертов (демо)](csgo-kuma-demo/README.md)
 ## Скоро
 Что-то будет:)
 ## История
